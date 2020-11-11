@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block style %}
+  <link rel="stylesheet" href="{% static 'posts/style.css'%}" />
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <h1>Edit Post</h1>
+
+    <form action="{% url 'posts:update' post.id %}" method="POST">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="body">본문</label>
+        <textarea class="form-control" id="body" cols="40" rows="10" name="body">{{ post.body }}</textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">수정하기</button>
+    </form>
+
+    <a href="{% url 'posts:table' %}">목록</a>    
+  </div>
+{% endblock %}
